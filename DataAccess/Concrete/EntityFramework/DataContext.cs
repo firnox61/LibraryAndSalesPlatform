@@ -20,6 +20,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Book> Books { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Share> Shares { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>()
