@@ -55,5 +55,17 @@ namespace Business.Concrete
             _noteDal.Update(newNote);
             return new SuccessResult();
         }
+
+        public IDataResult<List<NoteDetailDto>> GetAllByUserId(int id)
+        {
+            var notes=_noteDal.GetAll(n=> n.UserId==id);
+            return new SuccessDataResult<List<NoteDetailDto>>(_mapper.Map<List<NoteDetailDto>>(notes));
+        }
+
+        public IDataResult<List<NoteDetailDto>> GetAllByBookId(int id)
+        {
+            var notes = _noteDal.GetAll(n => n.BookId == id);
+            return new SuccessDataResult<List<NoteDetailDto>>(_mapper.Map<List<NoteDetailDto>>(notes));
+        }
     }
 }

@@ -32,5 +32,6 @@ namespace Business.Constants
         public static string CustomerListed = "Müşteriler listelendi";
         public static string CustomerGet = "Müşteri getirildi";
         public static string CustomerUpdate = "Müşteri güncellendi";
+        public static string NoteIsNotShared="Not paylaşılabilir Değil !!!";
     }
 }

@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Core.Entities.Concrete;
+﻿
 using Core.Utilities.Result;
 using Entities.Concrete;
 using Entities.DTOs.UsersDetail;
@@ -19,6 +18,10 @@ namespace Business.Abstract
         IResult Delete(int  id);
         User GetByMail(string email);
         IResult EditProfil(UserDto userDto, string password);
+        IDataResult<List<UserDto>> GetUserDetailDtos();
+        IDataResult<UserDto> GetByUserId(int userId);
+        IDataResult<List<UserDto>> GetAll();
+
 
     }
 }

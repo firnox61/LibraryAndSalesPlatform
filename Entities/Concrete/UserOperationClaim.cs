@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Concrete
+namespace Entities.Concrete
 {
-    public class OperationClaim : IEntity
+    public class UserOperationClaim : IEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-
+        public int UserId { get; set; }
+        public int OperationClaimId { get; set; }
     }
 }

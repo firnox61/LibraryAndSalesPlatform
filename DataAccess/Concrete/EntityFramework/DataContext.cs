@@ -1,5 +1,4 @@
 ﻿
-using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=den4;Trusted_Connection=true;TrustServerCertificate=True; Integrated Security=SSPI;");
+             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=den7;Trusted_Connection=true;TrustServerCertificate=True; Integrated Security=SSPI;");
             // optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=Recapnewdatabase;Trusted_Connection=true;Integrated Security=SSPI;");
             //TrustServerCertificate=True;
         }
@@ -43,10 +42,10 @@ namespace DataAccess.Concrete.EntityFramework
             .HasForeignKey(n => n.BookId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Customer>()
+            modelBuilder.Entity<User>()
                 .HasMany(u => u.Notes)
-                .WithOne(n => n.Customer)
-                .HasForeignKey(n => n.CustomerId)
+                .WithOne(n => n.User)
+                .HasForeignKey(n => n.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
            
 

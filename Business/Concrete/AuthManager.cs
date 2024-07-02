@@ -2,7 +2,6 @@
 //using Azure.Core;
 using Business.Abstract;
 using Business.Constants;
-using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;

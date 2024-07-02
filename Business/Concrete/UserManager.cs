@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
-using Core.Entities.Concrete;
+
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs.BooksDetail;
 using Entities.DTOs.UsersDetail;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,26 @@ namespace Business.Concrete
         public List<OperationClaim> GetClaims(User user)
         {
           return _userDal.GetClaims(user);
+        }
+
+        public IDataResult<List<UserDto>> GetUserDetailDtos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<UserDto> GetByUserId(int userId)
+        {
+            var user = _userDal.Get(b => b.Id == userId);
+            return new SuccessDataResult<UserDto>(_mapper.Map<UserDto>(user));
+        }
+
+        public IDataResult<List<UserDto>> GetAll()
+        {
+            var users = _userDal.GetAll();
+
+            // throw new NotImplementedException();
+            // var book = _mapper.Map<List<Book>>(BookListDto);
+            return new SuccessDataResult<List<UserDto>>(_mapper.Map<List<UserDto>>(users));
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Entities.Concrete;
+
 using Entities.Concrete;
 using Entities.DTOs.BooksDetail;
 using Entities.DTOs.NoteDetail;
@@ -26,6 +26,9 @@ namespace WebAPI.Mapping
             CreateMap<User, RegisterUserDto>().ReverseMap();
 
             CreateMap<Note, CreateNoteDTo>().ReverseMap();
+            CreateMap<Note, NoteDetailDto>().ReverseMap();
+            CreateMap<Note, NoteDto>().ReverseMap();
+            
 
         }
     }

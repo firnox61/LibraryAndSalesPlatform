@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities.Concrete
+namespace Entities.Concrete
 {
     public class User:IEntity
     {
@@ -16,7 +16,7 @@ namespace Core.Entities.Concrete
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
         public bool Status { get; set; }
-       // public ICollection<Note> Notes { get; set; }
+        public ICollection<Note> Notes { get; set; }
 
     }
 }

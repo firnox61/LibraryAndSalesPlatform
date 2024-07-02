@@ -15,8 +15,11 @@ namespace Business.Abstract
         IResult Add(CreateNoteDTo createNoteDTo);
         IResult Update(CreateNoteDTo createNoteDTo);
         IResult Delete(int id);
-        
-        
+        IDataResult<List<NoteDetailDto>> GetAllByUserId(int id);
+        IDataResult<List<NoteDetailDto>> GetAllByBookId(int id);
+      
+
+
 
     }
 }

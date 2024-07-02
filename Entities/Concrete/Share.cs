@@ -1,5 +1,4 @@
 ﻿using Core.Entites;
-using Core.Entities.Concrete;
 using Core.Utilities;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace Entities.Concrete
         public int NoteId { get; set; }
         public Note Note { get; set; }
         public int SharedWithUserId { get; set; } // Paylaşılan kullanıcının Id'si
-        public Customer SharedWithUser { get; set; } // Navigation property
+        public User SharedWithUser { get; set; } // Navigation property
         public SharePrivacy Privacy { get; set; }
         //  public User SharedWithUser { get; set; }
     }

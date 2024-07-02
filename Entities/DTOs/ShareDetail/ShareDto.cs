@@ -12,6 +12,6 @@ namespace Entities.DTOs.ShareDetail
         public int Id { get; set; }
         public int NoteId { get; set; }
         public int SharedWithUserId { get; set; }
-        public DateTime SharedAt { get; set; }
+       // public DateTime SharedAt { get; set; }
     }
 }

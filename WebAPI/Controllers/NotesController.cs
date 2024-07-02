@@ -68,5 +68,25 @@ namespace WebAPI.Controllers
             }
             return BadRequest();
         }
+        [HttpGet("getbyuser")]
+        public IActionResult GetByUserNote(int id)
+        {
+            var result = _noteService.GetAllByUserId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbybook")]
+        public IActionResult GetByBookNote(int id)
+        {
+            var result = _noteService.GetAllByBookId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

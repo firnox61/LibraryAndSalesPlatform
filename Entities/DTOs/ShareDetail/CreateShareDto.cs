@@ -14,6 +14,7 @@ namespace Entities.DTOs.ShareDetail
         public int NoteId { get; set; }
         public int SharedWithUserId { get; set; }
         public SharePrivacy Privacy { get; set; }
+
     }
 }
 /* public int Id { get; set; }

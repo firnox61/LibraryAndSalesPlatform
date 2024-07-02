@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Core.Entities.Concrete;
+
 using Entities.Concrete;
 using Entities.DTOs.UsersDetail;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +33,26 @@ namespace WebAPI.Controllers
         public IActionResult EditUser(UserDto userDto, string password)
         {
             var result = _userService.EditProfil(userDto, password);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _userService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int userId)
+        {
+            var result = _userService.GetByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);
