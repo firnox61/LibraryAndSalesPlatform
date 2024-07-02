@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
-using Azure.Core;
+//using Azure.Core;
 using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs.UsersDetail;
@@ -19,18 +21,24 @@ namespace Business.Concrete
     {
         private IUserService _userService;
         private readonly IMapper _mapper;
+        private ITokenHelper _tokenHelper;
         IUserDal _userDal;
 
-        public AuthManager(IUserService userService, IMapper mapper, IUserDal userDal)
+        public AuthManager(IUserService userService, IMapper mapper, IUserDal userDal, ITokenHelper tokenHelper)
         {
             _userService = userService;
             _mapper = mapper;
             _userDal = userDal;
+            _tokenHelper = tokenHelper;
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
-            throw new NotImplementedException();
+            var claims = _userService.GetClaims(user);//rollerini ver
+            var accessToken = _tokenHelper.CreateToken(user, claims);
+            return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+
+            //throw new NotImplementedException();
         }
 
         public IDataResult<User> Login(LoginUserDto loginUserDto)

@@ -25,5 +25,12 @@ namespace Business.Constants
         public static string UserUpdate="Kullanıcı bilgileri güncellendi";
         public static string UserAdded="Kullanıcı eklendi ";
         public static string AuthorizationDenied="Yetkiniz yok";
+        public static string AccessTokenCreated="Token üretildi";
+        public static string CustomerNot = "Müşteri bulunamadı";
+        public static string CustomerAdded = "Müşteri eklendi";
+        public static string CustomerDelete = "Müşteri silindi";
+        public static string CustomerListed = "Müşteriler listelendi";
+        public static string CustomerGet = "Müşteri getirildi";
+        public static string CustomerUpdate = "Müşteri güncellendi";
     }
 }

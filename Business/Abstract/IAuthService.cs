@@ -1,5 +1,7 @@
-﻿using Azure.Core;
+﻿//using Azure.Core;
+using Core.Entities.Concrete;
 using Core.Utilities.Result;
+using Core.Utilities.Security.JWT;
 using Entities.Concrete;
 using Entities.DTOs.UsersDetail;
 using System;

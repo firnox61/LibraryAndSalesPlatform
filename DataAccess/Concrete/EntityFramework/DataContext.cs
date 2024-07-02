@@ -1,4 +1,6 @@
-﻿using Entities.Concrete;
+﻿
+using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=den;Trusted_Connection=true;TrustServerCertificate=True; Integrated Security=SSPI;");
+             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=den4;Trusted_Connection=true;TrustServerCertificate=True; Integrated Security=SSPI;");
             // optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=Recapnewdatabase;Trusted_Connection=true;Integrated Security=SSPI;");
             //TrustServerCertificate=True;
         }
@@ -20,32 +22,33 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Book> Books { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Share> Shares { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.PasswordSalt)
+                      .HasColumnType("varbinary(500)");
+
+                entity.Property(e => e.PasswordHash)
+                      .HasColumnType("varbinary(500)");
+            });
+
             modelBuilder.Entity<Book>()
             .HasMany(b => b.Notes)
             .WithOne(n => n.Book)
             .HasForeignKey(n => n.BookId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Customer>()
                 .HasMany(u => u.Notes)
-                .WithOne(n => n.User)
-                .HasForeignKey(n => n.UserId)
+                .WithOne(n => n.Customer)
+                .HasForeignKey(n => n.CustomerId)
                 .OnDelete(DeleteBehavior.Cascade);
-            /* modelBuilder.Entity<Note>()
-                 .HasOne(n => n.User)
-                 .WithMany(u => u.Notes)
-                 .HasForeignKey(n => n.UserId)
-                 .OnDelete(DeleteBehavior.Restrict); // Opsiyonel: Kullanıcı silindiğinde notları silme
-
-             modelBuilder.Entity<Note>()
-                 .HasOne(n => n.Book)
-                 .WithMany(b => b.Notess)
-                 .HasForeignKey(n => n.BookId)
-                 .OnDelete(DeleteBehavior.Cascade); // Kitap silindiğinde notları da silme*/
+           
 
 
             modelBuilder.Entity<Note>()
@@ -61,6 +64,7 @@ namespace DataAccess.Concrete.EntityFramework
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Diğer ilişkiler ve konfigürasyonlar buraya eklenebilir
+            base.OnModelCreating(modelBuilder);
         }
 
     }

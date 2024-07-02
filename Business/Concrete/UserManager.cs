@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
@@ -60,6 +61,11 @@ namespace Business.Concrete
         {
             _userDal.Update(user);
             return new SuccessResult();
+        }
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+          return _userDal.GetClaims(user);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using Entities.DTOs.BooksDetail;
 using Entities.DTOs.NoteDetail;
