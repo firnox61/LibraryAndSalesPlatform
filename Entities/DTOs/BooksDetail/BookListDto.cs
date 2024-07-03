@@ -13,5 +13,6 @@ namespace Entities.DTOs.BooksDetail
         public string Title { get; set; }
         public string Genre { get; set; }
         public string CoverImageUrl { get; set; }
+        public int ShelfId { get; set; }
     }
 }

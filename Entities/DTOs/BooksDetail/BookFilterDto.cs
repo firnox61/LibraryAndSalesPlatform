@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOs.BooksDetail
 {
-    public class BookDetailDto : IDto
+    public class BookFilterDto:IDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Genre { get; set; }
-        public string Description { get; set; }
-
-        public int ShelfId { get; set; }
     }
 }

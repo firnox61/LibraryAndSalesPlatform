@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=den7;Trusted_Connection=true;TrustServerCertificate=True; Integrated Security=SSPI;");
+             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=den17;Trusted_Connection=true;TrustServerCertificate=True; Integrated Security=SSPI;");
             // optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=Recapnewdatabase;Trusted_Connection=true;Integrated Security=SSPI;");
             //TrustServerCertificate=True;
         }
@@ -21,6 +21,10 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Book> Books { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Share> Shares { get; set; }
+        public DbSet<Shelf> Shelves { get; set; }
+        public DbSet<FriendShip> FriendShips { get; set; }
+        
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
@@ -47,8 +51,11 @@ namespace DataAccess.Concrete.EntityFramework
                 .WithOne(n => n.User)
                 .HasForeignKey(n => n.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
-           
 
+            modelBuilder.Entity<Book>()
+           .HasOne(b => b.Shelf)
+           .WithMany(s => s.Books)
+           .HasForeignKey(b => b.ShelfId);
 
             modelBuilder.Entity<Note>()
            .HasMany(n => n.Shares)
@@ -60,6 +67,21 @@ namespace DataAccess.Concrete.EntityFramework
                 .HasOne(ns => ns.SharedWithUser)
                 .WithMany()
                 .HasForeignKey(ns => ns.SharedWithUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FriendShip>()
+        .HasKey(f => f.Id);
+
+            modelBuilder.Entity<FriendShip>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.Friendships)
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FriendShip>()
+                .HasOne(f => f.Friend)
+                .WithMany()
+                .HasForeignKey(f => f.FriendId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Diğer ilişkiler ve konfigürasyonlar buraya eklenebilir

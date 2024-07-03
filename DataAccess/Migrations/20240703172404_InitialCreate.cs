@@ -5,28 +5,11 @@
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShelfLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoverImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
@@ -51,6 +34,19 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OperationClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shelves",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shelves", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,6 +79,55 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoverImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShelfId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Shelves_ShelfId",
+                        column: x => x.ShelfId,
+                        principalTable: "Shelves",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FriendShips",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FriendId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FriendShips", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FriendShips_Users_FriendId",
+                        column: x => x.FriendId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FriendShips_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,6 +186,21 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Books_ShelfId",
+                table: "Books",
+                column: "ShelfId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendShips_FriendId",
+                table: "FriendShips",
+                column: "FriendId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendShips_UserId",
+                table: "FriendShips",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Notes_BookId",
                 table: "Notes",
                 column: "BookId");
@@ -168,6 +228,9 @@ namespace DataAccess.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
+                name: "FriendShips");
+
+            migrationBuilder.DropTable(
                 name: "OperationClaims");
 
             migrationBuilder.DropTable(
@@ -184,6 +247,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Shelves");
         }
     }
 }

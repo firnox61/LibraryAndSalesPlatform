@@ -17,8 +17,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(BookCreateDto bookCreateUpdateDto)
+        public IActionResult Add([FromForm] BookCreateDto bookCreateUpdateDto)
         {
+            if (bookCreateUpdateDto == null || bookCreateUpdateDto.CoverImageUrl == null || bookCreateUpdateDto.CoverImageUrl.Length == 0)
+            {
+                return BadRequest("Geçersiz veri");
+            }
             var result=_bookService.Add(bookCreateUpdateDto);
             if (result.Success)
             {
@@ -65,6 +69,18 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest();
+        }
+        [HttpGet("filter")]
+        public IActionResult GetFilteredBooks([FromQuery] BookFilterDto filter)
+        {
+            var result = _bookService.GetFilter(filter);
+
+            if (result.Success)
+            {
+                return Ok(result.Data); // Başarılı durumda kitapları döndür
+            }
+
+            return BadRequest(result.Message); // Başarısız durumda hata mesajını döndür
         }
     }
 }

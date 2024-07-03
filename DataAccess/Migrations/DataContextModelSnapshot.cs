@@ -30,7 +30,6 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CoverImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -41,15 +40,16 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ShelfLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ShelfId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShelfId");
 
                     b.ToTable("Books");
                 });
@@ -68,6 +68,29 @@ namespace DataAccess.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.FriendShip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FriendId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FriendId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FriendShips");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Note", b =>
@@ -143,6 +166,23 @@ namespace DataAccess.Migrations
                     b.ToTable("Shares");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Shelf", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Shelves");
+                });
+
             modelBuilder.Entity("Entities.Concrete.User", b =>
                 {
                     b.Property<int>("Id")
@@ -198,6 +238,36 @@ namespace DataAccess.Migrations
                     b.ToTable("UserOperationClaims");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Book", b =>
+                {
+                    b.HasOne("Entities.Concrete.Shelf", "Shelf")
+                        .WithMany("Books")
+                        .HasForeignKey("ShelfId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shelf");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.FriendShip", b =>
+                {
+                    b.HasOne("Entities.Concrete.User", "Friend")
+                        .WithMany()
+                        .HasForeignKey("FriendId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.User", "User")
+                        .WithMany("Friendships")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Friend");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Note", b =>
                 {
                     b.HasOne("Entities.Concrete.Book", "Book")
@@ -246,8 +316,15 @@ namespace DataAccess.Migrations
                     b.Navigation("Shares");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Shelf", b =>
+                {
+                    b.Navigation("Books");
+                });
+
             modelBuilder.Entity("Entities.Concrete.User", b =>
                 {
+                    b.Navigation("Friendships");
+
                     b.Navigation("Notes");
                 });
 #pragma warning restore 612, 618

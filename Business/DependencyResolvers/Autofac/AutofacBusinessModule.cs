@@ -42,7 +42,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CustomerManager>().As<ICustomerService>();
             builder.RegisterType<EfCustomerDal>().As<ICustomerDal>();
 
-           // builder.RegisterType<ShareManager>().As<DataContext>();
+            builder.RegisterType<ShelfManager>().As<IShelfService>();
+            builder.RegisterType<EfShelfDal>().As<IShelfDal>();
+
+            builder.RegisterType<FriendShipManager>().As<IFriendShipService>();
+            builder.RegisterType<EfFriendShipDal>().As<IFriendShipDal>();
+
+            // builder.RegisterType<ShareManager>().As<DataContext>();
 
 
             // builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();

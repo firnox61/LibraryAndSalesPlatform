@@ -17,6 +17,7 @@ namespace WebAPI.Mapping
             CreateMap<Book, BookSearchDto>().ReverseMap();
             CreateMap<Book, BookUpdateDto>().ReverseMap();
             CreateMap<Book, BookCreateDto>().ReverseMap();
+            CreateMap<Book, BookFilterDto>().ReverseMap();
 
             CreateMap<Share, CreateShareDto>().ReverseMap();
             CreateMap<Share, ShareDto>().ReverseMap();

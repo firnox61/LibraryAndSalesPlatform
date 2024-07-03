@@ -1,4 +1,5 @@
 ﻿using Core.Utilities.Result;
+using Entities.Concrete;
 using Entities.DTOs.BooksDetail;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace Business.Abstract
         IResult Add(BookCreateDto bookCreateUpdateDto); 
         IResult Update(BookUpdateDto bookCreateUpdateDto);
         IResult Delete(int id);
+        IDataResult<List<Book>> GetFilter(BookFilterDto bookFilterDto);
     }
 }

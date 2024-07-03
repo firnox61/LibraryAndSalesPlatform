@@ -1,4 +1,5 @@
 ﻿using Core.Entites;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace Entities.Concrete
         public byte[] PasswordSalt { get; set; }
         public byte[] PasswordHash { get; set; }
         public bool Status { get; set; }
+        [JsonIgnore]
         public ICollection<Note> Notes { get; set; }
+        public ICollection<FriendShip> Friendships { get; set; }
 
     }
 }

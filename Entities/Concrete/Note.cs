@@ -1,4 +1,5 @@
 ﻿using Core.Entites;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,10 +15,11 @@ namespace Entities.Concrete
         public string Description { get; set; }
         public bool IsShared { get; set; }
         public int UserId { get; set; }
+        [JsonIgnore]
         public User User { get; set; }
         public int BookId { get; set; }
-       public Book Book { get; set; }
-
+        [JsonIgnore]
+        public Book Book { get; set; }
         public ICollection<Share> Shares { get; set; }
 
 
