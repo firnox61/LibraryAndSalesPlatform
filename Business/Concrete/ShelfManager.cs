@@ -4,6 +4,7 @@ using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs.ShelfDetail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,11 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult Add(Shelf shelf)
+        public IResult Add(CreateShelfDto createShelfDto)
         {
-            _shelfDal.Add(shelf);
+            var result=_mapper.Map<Shelf>(createShelfDto);
+
+            _shelfDal.Add(result);
             return new SuccessResult(Messages.ShelfdAdd);
         }
 

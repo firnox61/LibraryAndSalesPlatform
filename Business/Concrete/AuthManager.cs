@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-//using Azure.Core;
 using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
-using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs.UsersDetail;
+using Entities.JWT;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,7 +62,7 @@ namespace Business.Concrete
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             _userService.Add(user);
-            return new SuccessDataResult<User>(user);
+            return new SuccessDataResult<User>(user,Messages.UserRegistered);
         }
         public IResult UserExists(string email)
         {

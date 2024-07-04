@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result;
 using Entities.Concrete;
+using Entities.DTOs.UsersDetail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace Business.Abstract
     public interface IFriendShipService
     {
         IDataResult<FriendShip> AddFriend(int userId, int friendId);
-        IDataResult<List<User>> GetFriend(int userId);
+        IDataResult<List<UserDto>> GetFriend(int userId);
     }
 }

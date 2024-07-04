@@ -72,7 +72,9 @@ namespace Business.Concrete
 
         public IDataResult<List<UserDto>> GetUserDetailDtos()
         {
-            throw new NotImplementedException();
+            var users = _userDal.GetAll();
+            var userDtos = _mapper.Map<List<UserDto>>(users);
+            return new SuccessDataResult<List<UserDto>>(userDtos,Messages.UserDetailList);
         }
 
         public IDataResult<UserDto> GetByUserId(int userId)

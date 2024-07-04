@@ -9,7 +9,6 @@ using Core.CrossCuttingCorcerns.Logging;
 
 //using Core.Utilities.Helper.FileHelper;
 using Core.Utilities.Interceptors;
-using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.JWT;
 
 namespace Business.DependencyResolvers.Autofac
 {

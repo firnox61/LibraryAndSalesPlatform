@@ -1,8 +1,8 @@
 ﻿//using Azure.Core;
 using Core.Utilities.Result;
-using Core.Utilities.Security.JWT;
 using Entities.Concrete;
 using Entities.DTOs.UsersDetail;
+using Entities.JWT;
 using System;
 using System.Collections.Generic;
 using System.Linq;

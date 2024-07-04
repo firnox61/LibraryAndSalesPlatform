@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
+using Core.CrossCuttingCorcerns.Logging;
 using Core.Utilities;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
@@ -25,9 +26,9 @@ namespace Business.Concrete
         private readonly IUserDal _userDal;
         private IFriendShipService _friendShipService;
         private IFriendShipDal _friendShipDal;
-        //  private DataContext _context;
-
-        public ShareManager(IShareDal shareDal, IMapper mapper, INoteDal noteDal, IUserDal userDal, IFriendShipService friendShipService, IFriendShipDal friendShipDal)
+        private readonly ILoggerService _logger;
+        public ShareManager(IShareDal shareDal, IMapper mapper, INoteDal noteDal, IUserDal userDal
+            , IFriendShipService friendShipService, IFriendShipDal friendShipDal, ILoggerService loggerService)
         {
             _shareDal = shareDal;
             _mapper = mapper;
@@ -36,21 +37,26 @@ namespace Business.Concrete
             _userDal = userDal;
             _friendShipService = friendShipService;
             _friendShipDal = friendShipDal;
+            _logger = loggerService;
         }
 
         public IResult Add(CreateShareDto createShareDto)
         {
+            _logger.LogInfo("Share Add  method called");
             // var note = _context.Notes.Find(createShareDto.NoteId);
             IResult result = BusinessRules.Run(CheckIfNoteIsShared(createShareDto.NoteId),SharePrivateSettings(createShareDto));
             if (result != null)//kurala uymayan bir durum oluşmuşsa
             {
+                _logger.LogWarning("Share Add Method not Completed");
                 return result;
+                
                // return new ErrorResult();
             }
             SendNoteShare(createShareDto.SharedWithUserId, createShareDto.NoteId);
+            _logger.LogInfo("Share Add method completed");
             return new SuccessResult(Messages.ShareAdd);
 
-
+           
         }
 
         public IResult Delete(int id)
@@ -62,7 +68,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Share>> GetAll()
         {
-            throw new NotImplementedException();
+            var shares=_shareDal.GetAll();
+            return new SuccessDataResult<List<Share>>(shares);
         }
 
         public IDataResult<ShareDto> GetById(int id)

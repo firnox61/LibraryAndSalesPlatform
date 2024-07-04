@@ -4,7 +4,6 @@ using Business.Abstract;
 using Business.Concrete;
 using Business.DependencyResolvers.Autofac;
 using Core.Utilities.Security.Encryption;
-using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog.Events;
 using Serilog;
 using System.Reflection;
+using Entities.JWT;
 
 var builder = WebApplication.CreateBuilder(args);
 

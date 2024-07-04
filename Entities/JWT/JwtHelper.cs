@@ -19,7 +19,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.Security.JWT
+namespace Entities.JWT
 {
     public class JwtHelper : ITokenHelper
     {

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs.ShelfDetail;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +19,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Shelf shelf)
+        public IActionResult Add(CreateShelfDto createShelfDto)
         {
-            var result = _shelfService.Add(shelf);
+            var result = _shelfService.Add(createShelfDto);
             if (result.Success)
             {
                 return Ok(result);

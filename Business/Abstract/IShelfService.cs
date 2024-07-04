@@ -1,6 +1,7 @@
 ﻿using Core.Utilities.Result;
 using Entities.Concrete;
 using Entities.DTOs.BooksDetail;
+using Entities.DTOs.ShelfDetail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Business.Abstract
 {
     public interface IShelfService
     {
-        IResult Add(Shelf shelf);
+        IResult Add(CreateShelfDto createShelfDto);
         IDataResult<List<Shelf>> GetAll();
         IDataResult<Shelf> GetById(int id);
     }

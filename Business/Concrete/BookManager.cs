@@ -115,6 +115,7 @@ namespace Business.Concrete
                 books = books.Where(b => b.Genre.Contains(bookFilterDto.Genre)).ToList();
             }
             _logger.LogInfo("GetFilter method completed");
+            
             return new SuccessDataResult<List<Book>>(books);
         }
     }

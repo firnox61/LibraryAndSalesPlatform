@@ -7,7 +7,7 @@ using Entities.DTOs.ShareDetail;
 using Entities.DTOs.ShelfDetail;
 using Entities.DTOs.UsersDetail;
 
-namespace WebAPI.Mapping
+namespace Entities.Mapping
 {
     public class GeneralMapping : Profile
     {

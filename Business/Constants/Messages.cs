@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.DTOs.UsersDetail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,5 +55,9 @@ namespace Business.Constants
         public static string ShelfDetail = "Detaylar getirildi";
         public static string ShareNot = "Paylaşım yapılamaz";
         public static string NotFriend="Paylaşılan kişi arkadaş değil";
+        public static string UserFriendList="Kullanıcı arkadaşları listelendi";
+        public static string FriendNotFound ="Kullanıcının arkadaşı bulunmamaktadır";
+        public static string FriendAdd = "Arkadaş eklendi";
+        public static string UserDetailList="Kullanıcı bilgileri listelendi";
     }
 }
