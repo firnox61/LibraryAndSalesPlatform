@@ -3,6 +3,7 @@ using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingCorcerns.Logging;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -24,12 +25,14 @@ namespace Business.Concrete
         IBookDal _bookDal;
         private readonly IMapper _mapper;
         private readonly IHostEnvironment _environment;
+        private readonly ILoggerService _logger;
 
-        public BookManager(IBookDal bookDal, IMapper mapper, IHostEnvironment environment)
+        public BookManager(IBookDal bookDal, IMapper mapper, IHostEnvironment environment, ILoggerService loggerService)
         {
             _bookDal = bookDal;
             _mapper = mapper;
             _environment = environment;
+            _logger = loggerService;
         }
         [ValidationAspect(typeof(BookValidator))]
         public IResult Add(BookCreateDto bookCreateUpdateDto)
@@ -98,12 +101,20 @@ namespace Business.Concrete
 
         public IDataResult<List<Book>> GetFilter(BookFilterDto bookFilterDto)
         {
-            var books=_bookDal.GetAll();
+            _logger.LogInfo("GetFilter method called");
+
+            var books = _bookDal.GetAll();
+
             if (!string.IsNullOrEmpty(bookFilterDto.Title))
             {
                 books = books.Where(b => b.Title.Contains(bookFilterDto.Title)).ToList();
-               
             }
+
+            if (!string.IsNullOrEmpty(bookFilterDto.Genre))
+            {
+                books = books.Where(b => b.Genre.Contains(bookFilterDto.Genre)).ToList();
+            }
+            _logger.LogInfo("GetFilter method completed");
             return new SuccessDataResult<List<Book>>(books);
         }
     }

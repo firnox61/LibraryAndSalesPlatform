@@ -41,24 +41,14 @@ namespace Business.Concrete
         public IResult Add(CreateShareDto createShareDto)
         {
             // var note = _context.Notes.Find(createShareDto.NoteId);
-            IResult result = BusinessRules.Run(CheckIfNoteIsShared(createShareDto.NoteId), SendNoteShare(createShareDto.SharedWithUserId, createShareDto.NoteId)
-                ,SharePrivateSettings(createShareDto));
-           // var note = _noteDal.Get(n => n.UserId == id);
-          // var sharedUser=_userDal.Get(createShareDto.)
-            if (result != null)
+            IResult result = BusinessRules.Run(CheckIfNoteIsShared(createShareDto.NoteId),SharePrivateSettings(createShareDto));
+            if (result != null)//kurala uymayan bir durum oluşmuşsa
             {
                 return result;
+               // return new ErrorResult();
             }
-           // var newShare = _mapper.Map<Share>(createShareDto);
-           // _shareDal.Add(newShare);
+            SendNoteShare(createShareDto.SharedWithUserId, createShareDto.NoteId);
             return new SuccessResult(Messages.ShareAdd);
-            /*if (note != null && note.IsShared == true)
-            {
-                var newShare = _mapper.Map<Share>(createShareDto);
-                _shareDal.Add(newShare);
-                return new SuccessResult();
-            }
-            return new ErrorResult(Messages.NoteIsNotShared);*/
 
 
         }
@@ -104,28 +94,28 @@ namespace Business.Concrete
             var newShare = _mapper.Map<Share>(createShareDto);
             if(newShare.Privacy==SharePrivacy.Public)
             {
-                _shareDal.Add(newShare);
+                //_shareDal.Add(newShare);
+                return new SuccessResult();
             }
             else if(newShare.Privacy==SharePrivacy.FriendsOnly)
             {
-                var friend = _friendShipService.GetFriend(newShare.SharedWithUserId);
-                if (friend!=null)
+                var isFriend = _friendShipDal.Get(f => f.FriendId == newShare.SharedWithUserId && f.FriendId == createShareDto.SharedWithUserId) != null;
+
+                if (isFriend)
                 {
-                    var result=_friendShipDal.GetAll(f=>f.FriendId==newShare.SharedWithUserId);
-                    if(result!=null)
-                    {
-                        _shareDal.Add(newShare);
-                    }
-                   // return new ErrorResult(Messages.NotFriend);
-                    
+                   // _shareDal.Add(newShare);
+                    return new SuccessResult();
                 }
-                
+                else
+                {
+                    return new ErrorResult(Messages.NotFriend);
+                }
             }
             else
             {
                 return new ErrorResult(Messages.ShareNot);
             }
-            return new SuccessResult();
+           
         }
         private IResult SendNoteShare(int userId, int id)
         {

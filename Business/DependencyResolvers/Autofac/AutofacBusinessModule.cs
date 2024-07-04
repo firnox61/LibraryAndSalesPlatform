@@ -3,6 +3,10 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.CrossCuttingCorcerns.Logging.SeriLog;
+
+using Core.CrossCuttingCorcerns.Logging;
+
 //using Core.Utilities.Helper.FileHelper;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
@@ -47,6 +51,9 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<FriendShipManager>().As<IFriendShipService>();
             builder.RegisterType<EfFriendShipDal>().As<IFriendShipDal>();
+
+
+            builder.RegisterType<SerilogLoggerService>().As<ILoggerService>().SingleInstance();
 
             // builder.RegisterType<ShareManager>().As<DataContext>();
 

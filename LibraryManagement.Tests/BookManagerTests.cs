@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business.Concrete;
 using Business.Constants;
+using Core.CrossCuttingCorcerns.Logging;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,6 +23,7 @@ namespace LibraryManagement.Tests
         private readonly Mock<IBookDal> _mockBookDal;
         private readonly Mock<IMapper> _mockMapper;//nesneler oluşuyor
         private readonly Mock<IHostEnvironment> _mockEnvironment;
+        private readonly Mock<ILoggerService> _mockLoggerService;
         private readonly BookManager _bookManager;
 
         public BookManagerTests()
@@ -29,10 +31,11 @@ namespace LibraryManagement.Tests
             _mockBookDal = new Mock<IBookDal>();
             _mockMapper = new Mock<IMapper>();
             _mockEnvironment = new Mock<IHostEnvironment>();
+            _mockLoggerService = new Mock<ILoggerService>();
 
             _mockEnvironment.Setup(e => e.ContentRootPath).Returns(Directory.GetCurrentDirectory());
 
-            _bookManager = new BookManager(_mockBookDal.Object, _mockMapper.Object, _mockEnvironment.Object);
+            _bookManager = new BookManager(_mockBookDal.Object, _mockMapper.Object, _mockEnvironment.Object, _mockLoggerService.Object);
         }
 
         [Fact]
