@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
+using Business.BusinessAspect.Aspect;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -34,7 +35,9 @@ namespace Business.Concrete
             _environment = environment;
             _logger = loggerService;
         }
+        
         [ValidationAspect(typeof(BookValidator))]
+       // [SecuredOperation("book.add")]
         public IResult Add(BookCreateDto bookCreateUpdateDto)
         {
             IResult result = BusinessRules.Run(BookAddImage(bookCreateUpdateDto));
@@ -117,6 +120,11 @@ namespace Business.Concrete
             _logger.LogInfo("GetFilter method completed");
             
             return new SuccessDataResult<List<Book>>(books);
+        }
+
+        public IDataResult<List<BookShelfDetailDto>> GetBookShelfDetail()
+        {
+            return new SuccessDataResult<List<BookShelfDetailDto>>(_bookDal.BookShelfDetail(),Messages.BookShelfDetail);
         }
     }
 }

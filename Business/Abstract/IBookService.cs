@@ -17,5 +17,6 @@ namespace Business.Abstract
         IResult Update(BookUpdateDto bookCreateUpdateDto);
         IResult Delete(int id);
         IDataResult<List<Book>> GetFilter(BookFilterDto bookFilterDto);
+        IDataResult<List<BookShelfDetailDto>> GetBookShelfDetail();
     }
 }

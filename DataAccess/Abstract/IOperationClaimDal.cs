@@ -1,6 +1,6 @@
 ﻿using Core.DataAccess;
+using Core.Entites;
 using Entities.Concrete;
-using Entities.DTOs.BooksDetail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IBookDal:IEntityRepository<Book>
+    public interface IOperationClaimDal:IEntityRepository<OperationClaim>
     {
-        List<BookShelfDetailDto> BookShelfDetail();
     }
 }

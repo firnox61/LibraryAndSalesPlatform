@@ -53,6 +53,15 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfFriendShipDal>().As<IFriendShipDal>();
 
 
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
+            builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
+
+            builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>();
+            builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>();
+
+
+
+
             builder.RegisterType<SerilogLoggerService>().As<ILoggerService>().SingleInstance();
 
             // builder.RegisterType<ShareManager>().As<DataContext>();

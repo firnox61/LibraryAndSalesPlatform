@@ -61,6 +61,7 @@ namespace Business.Concrete
            var user=_mapper.Map<User>(registerUserDto);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Status = true;
             _userService.Add(user);
             return new SuccessDataResult<User>(user,Messages.UserRegistered);
         }

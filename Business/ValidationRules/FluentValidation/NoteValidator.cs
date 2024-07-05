@@ -13,12 +13,9 @@ namespace Business.ValidationRules.FluentValidation
     {
         public NoteValidator()
         {
-           /* RuleFor(c => c.NoteName).MinimumLength(2);
-            RuleFor(c=>c.NoteName).NotEmpty();
-            RuleFor(c=>c.DailyPrice).NotEmpty();
-            RuleFor(c=>c.DailyPrice).GreaterThan(0);
-            RuleFor(c=>c.DailyPrice).GreaterThanOrEqualTo(10).When(c=>c.BrandId==1);*/
-            // RuleFor(c => c.NoteName).Must(StartWithA).WithMessage("Araçlar A harfi ile başlamalı");
+            RuleFor(c => c.Description).MinimumLength(2);
+            RuleFor(c=>c.IsShared).NotEmpty();
+          
             
 
 

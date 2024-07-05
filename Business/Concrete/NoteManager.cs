@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,7 +25,7 @@ namespace Business.Concrete
             _noteDal = noteDal;
             _mapper = mapper;
         }
-
+        [ValidationAspect(typeof(NoteValidator))]
         public IResult Add(CreateNoteDTo createNoteDTo)
         {
            var newNote=_mapper.Map<Note>(createNoteDTo);
@@ -49,7 +51,7 @@ namespace Business.Concrete
             var notes= _noteDal.GetAll();
             return new SuccessDataResult<List<CreateNoteDTo>>(_mapper.Map<List<CreateNoteDTo>>(notes), Messages.NoteList);
         }
-
+        [ValidationAspect(typeof(NoteValidator))]
         public IResult Update(CreateNoteDTo createNoteDTo)
         {
             var newNote = _mapper.Map<Note>(createNoteDTo);

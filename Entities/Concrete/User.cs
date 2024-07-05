@@ -20,6 +20,7 @@ namespace Entities.Concrete
         [JsonIgnore]
         public ICollection<Note> Notes { get; set; }
         public ICollection<FriendShip> Friendships { get; set; }
+        public ICollection<UserOperationClaim> UserOperationClaims { get; set; }
 
     }
 }

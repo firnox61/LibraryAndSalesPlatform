@@ -12,7 +12,9 @@ using Serilog.Events;
 using Serilog;
 using System.Reflection;
 using Entities.JWT;
-
+using Core.DependencyResolvers;
+using Core.Utilities.IoC;
+using Core.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -66,7 +68,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
         };
     });
+
+
+builder.Services.AddDependencyResolvers(new ICoreModule[]
+{
+            new CoreModule()
+});
+
+
 var app = builder.Build();
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -74,6 +85,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

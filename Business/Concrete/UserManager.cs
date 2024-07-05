@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
-
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
@@ -27,7 +28,7 @@ namespace Business.Concrete
             _userDal = userDal;
             _mapper = mapper;
         }
-
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
             _userDal.Add(user);
@@ -40,7 +41,7 @@ namespace Business.Concrete
             _userDal.Delete(result);
             return new SuccessResult();
         }
-
+        [ValidationAspect(typeof(UserValidator))]
         public IResult EditProfil(UserDto userDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -58,7 +59,7 @@ namespace Business.Concrete
         {
             return _userDal.Get(u => u.Email == email);
         }
-
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user)
         {
             _userDal.Update(user);

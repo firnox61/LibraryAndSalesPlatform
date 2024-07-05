@@ -59,5 +59,6 @@ namespace Business.Constants
         public static string FriendNotFound ="Kullanıcının arkadaşı bulunmamaktadır";
         public static string FriendAdd = "Arkadaş eklendi";
         public static string UserDetailList="Kullanıcı bilgileri listelendi";
+        public static string BookShelfDetail="Kitaplar raf biligileriyle listelenmiştir";
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240703172404_InitialCreate")]
+    [Migration("20240705123735_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -177,9 +177,15 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Location")
+                    b.Property<int>("LayerNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SectionCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SequenceNumber")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -237,6 +243,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OperationClaimId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserOperationClaims");
                 });
@@ -309,6 +319,25 @@ namespace DataAccess.Migrations
                     b.Navigation("SharedWithUser");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.UserOperationClaim", b =>
+                {
+                    b.HasOne("Entities.Concrete.OperationClaim", "OperationClaim")
+                        .WithMany("UserOperationClaims")
+                        .HasForeignKey("OperationClaimId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.User", "User")
+                        .WithMany("UserOperationClaims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OperationClaim");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Book", b =>
                 {
                     b.Navigation("Notes");
@@ -317,6 +346,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Note", b =>
                 {
                     b.Navigation("Shares");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.OperationClaim", b =>
+                {
+                    b.Navigation("UserOperationClaims");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Shelf", b =>
@@ -329,6 +363,8 @@ namespace DataAccess.Migrations
                     b.Navigation("Friendships");
 
                     b.Navigation("Notes");
+
+                    b.Navigation("UserOperationClaims");
                 });
 #pragma warning restore 612, 618
         }

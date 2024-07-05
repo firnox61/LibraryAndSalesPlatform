@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingCorcerns.Logging;
 using Core.Utilities;
 using Core.Utilities.Business;
@@ -39,7 +41,7 @@ namespace Business.Concrete
             _friendShipDal = friendShipDal;
             _logger = loggerService;
         }
-
+        [ValidationAspect(typeof(ShareValidator))]
         public IResult Add(CreateShareDto createShareDto)
         {
             _logger.LogInfo("Share Add  method called");
@@ -77,7 +79,7 @@ namespace Business.Concrete
             var share = _shareDal.Get(s => s.Id == id);
             return new SuccessDataResult<ShareDto>(_mapper.Map<ShareDto>(share), Messages.ShareDetail);    
         }
-
+        [ValidationAspect(typeof(ShareValidator))]
         public IResult Update(CreateShareDto createShareDto)
         {
             var newShare = _mapper.Map<Share>(createShareDto);

@@ -12,11 +12,10 @@ namespace Business.ValidationRules.FluentValidation
     public class UserValidator:AbstractValidator<User>
     {
         public UserValidator() {
-/*
-            RuleFor(r => r.RentDate).NotEmpty();
-            RuleFor(r=>r.CarId).NotNull();
-            RuleFor(r => r.CustomerId).NotNull();
-            RuleFor(r => r.ReturnDate).NotEmpty();*/
+
+            RuleFor(r => r.FirstName).NotEmpty();
+            RuleFor(r=>r.Email).NotNull();
+
         }
     }
 }

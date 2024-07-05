@@ -1,18 +1,17 @@
-﻿using Core.Entites;
+﻿using Core;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs.OperationDetailDto
 {
-    public class UserOperationClaim : IEntity
+    public class UserOperationDto : IDto
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
         public int OperationClaimId { get; set; }
-        public OperationClaim OperationClaim { get; set; }
     }
 }

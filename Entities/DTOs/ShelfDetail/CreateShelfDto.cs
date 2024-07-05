@@ -10,6 +10,9 @@ namespace Entities.DTOs.ShelfDetail
     public class CreateShelfDto:IDto
     {
         public int Id { get; set; }
-        public string Location { get; set; }
+        //public string Location { get; set; }
+        public int LayerNumber { get; set; }
+        public int SequenceNumber { get; set; }
+        public string SectionCode { get; set; }
     }
 }
