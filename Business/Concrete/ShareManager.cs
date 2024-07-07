@@ -39,7 +39,7 @@ namespace Business.Concrete
             _userDal = userDal;
             _friendShipService = friendShipService;
             _friendShipDal = friendShipDal;
-            _logger = loggerService;
+          
         }
         [ValidationAspect(typeof(ShareValidator))]
         public IResult Add(CreateShareDto createShareDto)

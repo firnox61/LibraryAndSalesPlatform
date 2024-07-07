@@ -26,14 +26,13 @@ namespace Business.Concrete
         IBookDal _bookDal;
         private readonly IMapper _mapper;
         private readonly IHostEnvironment _environment;
-        private readonly ILoggerService _logger;
 
-        public BookManager(IBookDal bookDal, IMapper mapper, IHostEnvironment environment, ILoggerService loggerService)
+        public BookManager(IBookDal bookDal, IMapper mapper, IHostEnvironment environment)
         {
             _bookDal = bookDal;
             _mapper = mapper;
             _environment = environment;
-            _logger = loggerService;
+           
         }
         
         [ValidationAspect(typeof(BookValidator))]
@@ -104,7 +103,6 @@ namespace Business.Concrete
 
         public IDataResult<List<Book>> GetFilter(BookFilterDto bookFilterDto)
         {
-            _logger.LogInfo("GetFilter method called");
 
             var books = _bookDal.GetAll();
 
@@ -117,7 +115,6 @@ namespace Business.Concrete
             {
                 books = books.Where(b => b.Genre.Contains(bookFilterDto.Genre)).ToList();
             }
-            _logger.LogInfo("GetFilter method completed");
             
             return new SuccessDataResult<List<Book>>(books);
         }
