@@ -33,6 +33,39 @@ When developing this project, the following principles were strictly adhered to:
 - **Clean Coding**: Ensures readability and ease of maintenance.
 - **DRY (Don't Repeat Yourself)**: Promotes code reuse and reduces redundancy.
 
+# **Kitaplık Arşiv ve Satış Platformu (.NET Core)**
+
+**Amaç:**
+Bu proje, adayın bir kitaplık arşivi yönetimi, kullanıcı etkileşimi ve e-ticaret özelliklerini içeren kapsamlı bir backend sistemi tasarlama ve uygulama becerisini değerlendirmek için tasarlanmıştır.
+
+## Ana Özellikler
+
+### 1. Kullanıcı Yönetimi
+- **Kayıt (Register)**: Kullanıcıların sisteme kayıt olmasını sağlar.
+- **Giriş (Login)**: Kayıtlı kullanıcıların sisteme giriş yapmasını sağlar.
+- **Profil Yönetimi**: Kullanıcıların profillerini yönetmesine olanak tanır.
+
+### 2. Kitap Yönetimi
+- **Kitap Ekleme (Görselli)**: Yeni kitaplar ekleyebilir ve bunlara görseller ekleyebilirsiniz.
+- **Düzenleme**: Mevcut kitap bilgilerini güncelleyebilirsiniz.
+- **Silme**: Kitapları sistemden kaldırabilirsiniz.
+- **Detaylı Raf Yeri Bilgisi Girişi**: Kitapların fiziksel olarak nerede bulunduğunu belirtebilirsiniz.
+- **Kitap Arama ve Filtreleme**: Kitapları arayabilir ve çeşitli kriterlere göre filtreleyebilirsiniz.
+
+### 3. Not Alma Sistemi
+- **Not Ekleme**: Kitaplarla ilgili notlar ekleyebilirsiniz.
+- **Düzenleme**: Mevcut notları güncelleyebilirsiniz.
+- **Silme**: Notları sistemden kaldırabilirsiniz.
+- **Notları Özel veya Paylaşımlı Olarak İşaretleme**: Notları yalnızca kendiniz için veya diğer kullanıcılarla paylaşacak şekilde işaretleyebilirsiniz.
+
+### 4. Paylaşım Sistemi
+- **Kitap Notlarını Paylaşma**: Kitap notlarını diğer kullanıcılarla paylaşabilirsiniz.
+- **Paylaşım Gizlilik Ayarları**: Notları herkese açık, sadece arkadaşlar veya özel olarak işaretleyebilirsiniz.
+
+
+
+
+
 ## Getting Started
 
 To get started with the project, follow these steps:
@@ -40,3 +73,5 @@ To get started with the project, follow these steps:
 1. Clone the repository:
    ```sh
    git clone https://github.com/yourusername/LibraryAndSalesPlatform.git
+
+
