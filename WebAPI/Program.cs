@@ -22,20 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();/*
-builder.Services.AddSingleton<IBookService, BookManager>();
-builder.Services.AddSingleton<IBookDal, EfBookDal>();
-
-builder.Services.AddSingleton<INoteService, NoteManager>();
-builder.Services.AddSingleton<INoteDal, EfNoteDal>();
-
-builder.Services.AddSingleton<IUserService, UserManager>();
-builder.Services.AddSingleton<IUserDal, EfUserDal>();
-
-//builder.Services.AddSingleton<IShareService, ShareManager>();
-builder.Services.AddSingleton<IShareDal, EfShareDal>();
-
-builder.Services.AddSingleton<IAuthService, AuthManager>();*/
+builder.Services.AddSwaggerGen();
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -77,7 +64,7 @@ builder.Services.AddDependencyResolvers(new ICoreModule[]
 
 
 var app = builder.Build();
-app.UseStaticFiles();
+//app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
