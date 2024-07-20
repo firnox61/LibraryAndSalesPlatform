@@ -22,12 +22,12 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --output ./output
+        run: dotnet publish -c Release -o output
 
       - name: Prepare deployment directory
         run: |
           mkdir -p public
-          cp -r ./output/* public/
+          cp -r output/* public/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
