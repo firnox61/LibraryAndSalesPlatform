@@ -24,8 +24,11 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --output ./output
 
-      - name: Deploy
+      - name: Publish to GitHub Pages
+        run: |
+          mkdir -p public
+          cp -r ./output/* public/
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
+          publish_dir: ./public
