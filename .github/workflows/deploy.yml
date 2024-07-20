@@ -22,15 +22,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet publish -c Release -o output
+        run: dotnet publish -c Release -o output WebAPI/WebAPI.csproj
 
-      - name: Prepare deployment directory
-        run: |
-          mkdir -p public
-          cp -r output/* public/
+      - name: List output directory contents
+        run: ls -al output
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./output
