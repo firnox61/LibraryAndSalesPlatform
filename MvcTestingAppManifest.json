@@ -1,6 +1,6 @@
 {
-  "Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/runner\/work\/LibraryAndSalesPlatform\/LibraryAndSalesPlatform\/Business",
-  "Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/runner\/work\/LibraryAndSalesPlatform\/LibraryAndSalesPlatform\/Core",
-  "DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/runner\/work\/LibraryAndSalesPlatform\/LibraryAndSalesPlatform\/DataAccess",
-  "Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/runner\/work\/LibraryAndSalesPlatform\/LibraryAndSalesPlatform\/Entities"
+  "Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "~",
+  "Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "~",
+  "DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "~",
+  "Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "~"
 }
