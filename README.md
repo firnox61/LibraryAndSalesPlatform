@@ -1,6 +1,18 @@
 # LibraryAndSalesPlatform
 
 **LibraryAndSalesPlatform** is a comprehensive library sales solution designed to provide enterprise-grade RESTful services using ASP.NET WebAPI and C#. This project offers a robust framework for managing various library operations.
+## Not Paylaşımı Koşulları
+
+Kullanıcılar arasında not paylaşımı yapabilmeleri için aşağıdaki koşulların sağlanması gerekmektedir:
+
+- **IsShared Özelliği**: Notun `IsShared` özelliği `true` olmalıdır.
+
+- **Privacy Seviyeleri**:
+  - `0` = Herkese açık paylaşım yapılabilir.
+  - `1` = Sadece arkadaşlar arasında paylaşım yapılabilir; bu işlem için arkadaş ekleme işlemi gerçekleştirilmelidir.
+  - `2` = Paylaşım özeldir; kimseyle paylaşılamaz.
+
+Bu koşullar sağlandığı takdirde not paylaşımı yapılabilmektedir.
 
 ## Features
 
