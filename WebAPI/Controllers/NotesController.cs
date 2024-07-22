@@ -49,9 +49,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(CreateNoteDTo createNoteDTo)
+        public IActionResult Update(UpdateNoteDto updateNoteDto)
         {
-            var result = _noteService.Update(createNoteDTo);
+            var result = _noteService.Update(updateNoteDto);
             if (result.Success)
             {
                 return Ok(result);

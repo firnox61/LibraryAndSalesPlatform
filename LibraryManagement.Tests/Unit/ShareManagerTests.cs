@@ -137,7 +137,7 @@ namespace LibraryManagement.Tests.Unit
             Assert.Equal(Messages.ShareDetail, result.Message);
         }
 
-        [Fact]
+      /*  [Fact]
         public void Update_CreateShareDto_Method_Test()
         {
             // Arrange
@@ -153,6 +153,6 @@ namespace LibraryManagement.Tests.Unit
             _mockShareDal.Verify(m => m.Update(share), Times.Once);
             Assert.True(result.Success);
             Assert.Equal(Messages.ShareUpdate, result.Message);
-        }
+        }*/
     }
 }

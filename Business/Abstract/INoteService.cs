@@ -10,10 +10,10 @@ namespace Business.Abstract
 {
     public interface INoteService
     {
-        IDataResult<List<CreateNoteDTo>> GetAll();
-        IDataResult<CreateNoteDTo> GetById(int id);
+        IDataResult<List<NoteDetailDto>> GetAll();
+        IDataResult<NoteDetailDto> GetById(int id);
         IResult Add(CreateNoteDTo createNoteDTo);
-        IResult Update(CreateNoteDTo createNoteDTo);
+        IResult Update(UpdateNoteDto updateNoteDto);
         IResult Delete(int id);
         IDataResult<List<NoteDetailDto>> GetAllByUserId(int id);
         IDataResult<List<NoteDetailDto>> GetAllByBookId(int id);

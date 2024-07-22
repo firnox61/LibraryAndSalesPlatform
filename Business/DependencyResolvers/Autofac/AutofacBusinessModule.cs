@@ -42,9 +42,6 @@ namespace Business.DependencyResolvers.Autofac
 
            
 
-            builder.RegisterType<CustomerManager>().As<ICustomerService>();
-            builder.RegisterType<EfCustomerDal>().As<ICustomerDal>();
-
             builder.RegisterType<ShelfManager>().As<IShelfService>();
             builder.RegisterType<EfShelfDal>().As<IShelfDal>();
 

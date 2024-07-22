@@ -40,21 +40,21 @@ namespace Business.Concrete
             return new SuccessResult(Messages.NoteDelete);
         }
 
-        public IDataResult<CreateNoteDTo> GetById(int id)
+        public IDataResult<NoteDetailDto> GetById(int id)
         {
             var note = _noteDal.Get(n => n.Id == id);
-            return new SuccessDataResult<CreateNoteDTo>(_mapper.Map<CreateNoteDTo>(note), Messages.NoteDetail);
+            return new SuccessDataResult<NoteDetailDto>(_mapper.Map<NoteDetailDto>(note), Messages.NoteDetail);
         }
 
-        public IDataResult<List<CreateNoteDTo>> GetAll()
+        public IDataResult<List<NoteDetailDto>> GetAll()
         {
             var notes= _noteDal.GetAll();
-            return new SuccessDataResult<List<CreateNoteDTo>>(_mapper.Map<List<CreateNoteDTo>>(notes), Messages.NoteList);
+            return new SuccessDataResult<List<NoteDetailDto>>(_mapper.Map<List<NoteDetailDto>>(notes), Messages.NoteList);
         }
         [ValidationAspect(typeof(NoteValidator))]
-        public IResult Update(CreateNoteDTo createNoteDTo)
+        public IResult Update(UpdateNoteDto updateNoteDto)
         {
-            var newNote = _mapper.Map<Note>(createNoteDTo);
+            var newNote = _mapper.Map<Note>(updateNoteDto);
             _noteDal.Update(newNote);
             return new SuccessResult(Messages.NoteUpdate);
         }

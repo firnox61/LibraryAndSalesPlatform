@@ -44,18 +44,17 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ShareValidator))]
         public IResult Add(CreateShareDto createShareDto)
         {
-            _logger.LogInfo("Share Add  method called");
+           
             // var note = _context.Notes.Find(createShareDto.NoteId);
             IResult result = BusinessRules.Run(CheckIfNoteIsShared(createShareDto.NoteId),SharePrivateSettings(createShareDto));
             if (result != null)//kurala uymayan bir durum oluşmuşsa
             {
-                _logger.LogWarning("Share Add Method not Completed");
                 return result;
                 
-               // return new ErrorResult();
             }
             SendNoteShare(createShareDto.SharedWithUserId, createShareDto.NoteId);
-            _logger.LogInfo("Share Add method completed");
+            var share = _mapper.Map<Share>(createShareDto);
+            _shareDal.Add(share);
             return new SuccessResult(Messages.ShareAdd);
 
            
@@ -68,10 +67,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ShareDelete);
         }
 
-        public IDataResult<List<Share>> GetAll()
+        public IDataResult<List<ShareDto>> GetAll()
         {
             var shares=_shareDal.GetAll();
-            return new SuccessDataResult<List<Share>>(shares);
+            return new SuccessDataResult<List<ShareDto>>(_mapper.Map<List<ShareDto>>(shares));
         }
 
         public IDataResult<ShareDto> GetById(int id)
@@ -80,9 +79,9 @@ namespace Business.Concrete
             return new SuccessDataResult<ShareDto>(_mapper.Map<ShareDto>(share), Messages.ShareDetail);    
         }
         [ValidationAspect(typeof(ShareValidator))]
-        public IResult Update(CreateShareDto createShareDto)
+        public IResult Update(ShareDto shareDto)
         {
-            var newShare = _mapper.Map<Share>(createShareDto);
+            var newShare = _mapper.Map<Share>(shareDto);
             _shareDal.Update(newShare);
             return new SuccessResult(Messages.ShareUpdate);
         }
@@ -154,10 +153,10 @@ namespace Business.Concrete
                 IsShared = note.IsShared,
                 UserId = userId,
                 BookId = note.BookId,
-            };;
+            };
             var result = _mapper.Map<Note>(newNote);
            
-
+            //_shareDal.Add()
              _noteDal.Add(result);
             return new SuccessResult(Messages.ShareTrue);
             

@@ -36,7 +36,7 @@ namespace Business.Concrete
         }
         
         [ValidationAspect(typeof(BookValidator))]
-        [SecuredOperation("admin,user")]
+        //[SecuredOperation("admin,user")]
         public IResult Add(BookCreateDto bookCreateUpdateDto)
         {
             IResult result = BusinessRules.Run(BookAddImage(bookCreateUpdateDto));

@@ -12,10 +12,10 @@ namespace Business.Abstract
 {
     public interface IShareService
     {
-        IDataResult<List<Share>> GetAll();
+        IDataResult<List<ShareDto>> GetAll();
         IDataResult<ShareDto> GetById(int id);
         IResult Add(CreateShareDto createShareDto);
-        IResult Update(CreateShareDto createShareDto);
+        IResult Update(ShareDto shareDto);
         IResult Delete(int id);
     }
 }

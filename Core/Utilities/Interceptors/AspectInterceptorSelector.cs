@@ -1,5 +1,6 @@
 ﻿using Castle.DynamicProxy;
 using Core.Aspects.Autofac.Logging;
+using Core.Aspects.Autofac.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace Core.Utilities.Interceptors
             // classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger)));// sisteme loglama ekleseydik kullanacağımız şey  ototmatik olarak tüm metotları loga dahil et demek
             //buraya yine bu şekilde performance işini ekleyebilirdik ve bu tüm sistemi performanc eder
             classAttributes.Add(new LogAspect());
+           // classAttributes.Add(new ValidationAspect());
+           // classAttributes.Add(ne)
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();//önceliklerine bak
         }

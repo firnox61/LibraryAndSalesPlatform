@@ -14,7 +14,7 @@ namespace Entities.Mapping
     {
         public GeneralMapping()
         {
-            CreateMap<UserOperationClaim,UserOperationDto>().ReverseMap();
+           /* CreateMap<UserOperationClaim,UserOperationDto>().ReverseMap();
             CreateMap<OperationClaim, OperationDto>().ReverseMap();
             CreateMap<Book,BookDetailDto>().ReverseMap();
             CreateMap<Book, BookListDto>().ReverseMap();
@@ -33,7 +33,7 @@ namespace Entities.Mapping
             CreateMap<Note, CreateNoteDTo>().ReverseMap();
             CreateMap<Note, NoteDetailDto>().ReverseMap();
             CreateMap<Note, NoteDto>().ReverseMap();
-            CreateMap<Shelf, CreateShelfDto>().ReverseMap();
+            CreateMap<Shelf, CreateShelfDto>().ReverseMap();*/
 
             
 

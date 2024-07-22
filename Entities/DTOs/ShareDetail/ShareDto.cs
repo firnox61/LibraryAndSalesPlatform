@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Entities.DTOs.ShareDetail
         public int Id { get; set; }
         public int NoteId { get; set; }
         public int SharedWithUserId { get; set; }
-       // public DateTime SharedAt { get; set; }
+        public SharePrivacy Privacy { get; set; }
+        // public DateTime SharedAt { get; set; }
     }
 }

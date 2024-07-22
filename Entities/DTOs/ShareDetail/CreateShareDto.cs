@@ -10,7 +10,6 @@ namespace Entities.DTOs.ShareDetail
 {
     public class CreateShareDto : IDto
     {
-        public int Id { get; set; }
         public int NoteId { get; set; }
         public int SharedWithUserId { get; set; }
         public SharePrivacy Privacy { get; set; }

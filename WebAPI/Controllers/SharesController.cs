@@ -47,9 +47,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPut("update")]
-        public IActionResult Update(CreateShareDto createShareDto)
+        public IActionResult Update(ShareDto shareDto)
         {
-            var result = _shareService.Update(createShareDto);
+            var result = _shareService.Update(shareDto);
             if (result.Success)
             {
                 return Ok(result);
