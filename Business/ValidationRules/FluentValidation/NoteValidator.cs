@@ -1,5 +1,6 @@
 ﻿using Business.Constants;
 using Entities.Concrete;
+using Entities.DTOs.NoteDetail;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class NoteValidator:AbstractValidator<Note>//fluentvalidationdan geliyor
+    public class NoteValidator:AbstractValidator<CreateNoteDTo>//fluentvalidationdan geliyor
     {
         public NoteValidator()
         {

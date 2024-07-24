@@ -24,7 +24,7 @@ namespace Entities.JWT
     public class JwtHelper : ITokenHelper
     {
         public IConfiguration Configuration { get; }//appsettingsdeki değerleri okuyor
-        private TokenOptions _tokenOptions;//okunnan değerleri bir enesneye atamamaıız lazım
+        private TokenOptions _tokenOptions;//okunnan değerleri bir nesneye atamamaıız lazım
         private DateTime _accessTokenExpiration;//yoken zzamanı
         public JwtHelper(IConfiguration configuration)
         {

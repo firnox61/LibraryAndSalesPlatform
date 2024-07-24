@@ -34,7 +34,7 @@ namespace Core.Extensions
         private Task HandleExceptionAsync(HttpContext httpContext, Exception e)
         {
             httpContext.Response.ContentType = "application/json";//bensana bir json yolladım demek
-            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
 
             string message = "Internal Server Error";
             IEnumerable<ValidationFailure> errors;

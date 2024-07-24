@@ -1,6 +1,14 @@
-﻿using Entities.Concrete;
+﻿using AutoMapper;
+using Business.Concrete;
+using Business.Constants;
+using DataAccess.Abstract;
+using Entities.Concrete;
+using Entities.DTOs.BooksDetail;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,38 +19,69 @@ using System.Threading.Tasks;
 
 namespace LibraryManagement.Tests.Integration
 {
-    public class BookIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
+    public class BookManagerTests
     {
-        private readonly HttpClient _client;
+        private readonly Mock<IBookDal> _mockBookDal;
+        private readonly Mock<IMapper> _mockMapper;
+        private readonly Mock<IHostEnvironment> _mockEnvironment;
+        private readonly BookManager _bookManager;
 
-        public BookIntegrationTests(WebApplicationFactory<Program> factory)
+        public BookManagerTests()
         {
-            _client = factory.CreateClient();
+            _mockBookDal = new Mock<IBookDal>();
+            _mockMapper = new Mock<IMapper>();
+            _mockEnvironment = new Mock<IHostEnvironment>();
+            _mockEnvironment.Setup(env => env.ContentRootPath).Returns("some/path");
+            _bookManager = new BookManager(_mockBookDal.Object, _mockMapper.Object, _mockEnvironment.Object);
         }
 
-        /* [Fact]
-         public async Task AddBook_ShouldReturnSuccess_WhenBookIsValid()
-         {
-             // Arrange
-             var filePath = "path/to/your/image.jpg"; // Set your image path here
-             var fileStream = File.OpenRead(filePath);
-             var fileContent = new StreamContent(fileStream);
-             fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+        [Fact]
+        public void Add_ValidBook_ReturnsSuccessResult()
+        {
+            
+            var bookCreateDto = new BookCreateDto
+            {
+                Title = "Test Book",
+                Genre = "Test Genre",
+                Description = "Test Description",
+                CoverImageUrl = new Mock<IFormFile>().Object,
+                ShelfId = 1
+            };
 
-             var formData = new MultipartFormDataContent();
-             formData.Add(new StringContent("Integration Test Book"), "Title");
-             formData.Add(new StringContent("Test Genre"), "Genre");
-             formData.Add(new StringContent("Test Description"), "Description");
-             formData.Add(new StringContent("1"), "ShelfId");
-             formData.Add(fileContent, "CoverImageUrl", Path.GetFileName(filePath));
+            _mockMapper.Setup(m => m.Map<Book>(It.IsAny<BookCreateDto>())).Returns(new Book());
 
-             // Act
-             var response = await _client.PostAsync("/api/books", formData);
+            
+            var result = _bookManager.Add(bookCreateDto);
 
-             // Assert
-             response.EnsureSuccessStatusCode();
-             var responseMessage = await response.Content.ReadAsStringAsync();
-             Assert.Equal("Book successfully added", responseMessage); // Adjust this message as per your Messages class
-         }*/
+            
+            Assert.True(result.Success);
+            Assert.Equal(Messages.BookAdd, result.Message);
+        }
+
+        [Fact]
+        public void GetAll_ReturnsListOfBooks()
+        {
+           
+            var books = new List<Book>
+        {
+            new Book { Id = 1, Title = "Book 1", Genre = "Genre 1" },
+            new Book { Id = 2, Title = "Book 2", Genre = "Genre 2" }
+        };
+
+            var bookDtos = new List<BookListDto>
+        {
+            new BookListDto { Id = 1, Title = "Book 1", Genre = "Genre 1" },
+            new BookListDto { Id = 2, Title = "Book 2", Genre = "Genre 2" }
+        };
+            //It.IsAny<System.Linq.Expressions.Expression<Func<Book, bool>>>())).Returns(books);
+            _mockBookDal.Setup(dal => dal.GetAll(It.IsAny<System.Linq.Expressions.Expression<Func<Book, bool>>>())).Returns(books);
+            _mockMapper.Setup(m => m.Map<List<BookListDto>>(books)).Returns(bookDtos);
+
+
+            var result = _bookManager.GetAll();
+
+            Assert.True(result.Success);
+            Assert.Equal(2, result.Data.Count);
+        }
     }
 }

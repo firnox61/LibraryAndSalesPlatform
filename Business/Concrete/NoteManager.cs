@@ -17,8 +17,8 @@ namespace Business.Concrete
 {
     public class NoteManager : INoteService
     {
-        INoteDal _noteDal;
-        IMapper _mapper;
+        private readonly INoteDal _noteDal;
+        private readonly IMapper _mapper;
 
         public NoteManager(INoteDal noteDal, IMapper mapper)
         {
@@ -68,7 +68,7 @@ namespace Business.Concrete
         public IDataResult<List<NoteDetailDto>> GetAllByBookId(int id)
         {
             var notes = _noteDal.GetAll(n => n.BookId == id);
-            return new SuccessDataResult<List<NoteDetailDto>>(_mapper.Map<List<NoteDetailDto>>(notes));
+            return new SuccessDataResult<List<NoteDetailDto>>(_mapper.Map<List<NoteDetailDto>>(notes),Messages.BookByNote);
         }
     }
 }

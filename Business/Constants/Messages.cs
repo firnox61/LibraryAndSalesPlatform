@@ -60,5 +60,9 @@ namespace Business.Constants
         public static string FriendAdd = "Arkadaş eklendi";
         public static string UserDetailList="Kullanıcı bilgileri listelendi";
         public static string BookShelfDetail="Kitaplar raf biligileriyle listelenmiştir";
+        public static string BooksList="Kitaplar listelendi";
+        public static string BookFilter="Kitaplar uygun biçimde filtrelendi";
+        public static string ClaimAdded="Claim eklendi";
+        public static string UserAddClaim="Kullanıcıya claim eklendi";
     }
 }

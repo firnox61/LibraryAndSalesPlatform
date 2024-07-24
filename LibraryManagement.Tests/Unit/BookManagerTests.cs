@@ -71,7 +71,7 @@ namespace LibraryManagement.Tests.Unit
             _mockBookDal.Verify(m => m.Delete(book), Times.Once);
             Assert.True(result.Success);
         }
-/*
+
         [Fact]
         public void GetAll_Should_Return_SuccessDataResult_With_BookListDtos()
         {
@@ -84,7 +84,8 @@ namespace LibraryManagement.Tests.Unit
         {
             new BookListDto { Id = 1, Title = "Test Book", Genre = "Test Genre", Description = "Test Description", ShelfId = 1 }
         };
-            _mockBookDal.Setup(m => m.GetAll()).Returns(books);
+            //It.IsAny<System.Linq.Expressions.Expression<Func<FriendShip, bool>>>()))
+            _mockBookDal.Setup(m => m.GetAll(It.IsAny<System.Linq.Expressions.Expression<Func<Book, bool>>>())).Returns(books);
             _mockMapper.Setup(m => m.Map<List<BookListDto>>(books)).Returns(bookListDtos);
 
             // Act
@@ -93,7 +94,7 @@ namespace LibraryManagement.Tests.Unit
             // Assert
             Assert.True(result.Success);
             Assert.Equal(bookListDtos, result.Data);
-        }*/
+        }
 
         [Fact]
         public void GetById_BookDetailDto_Method_Test()

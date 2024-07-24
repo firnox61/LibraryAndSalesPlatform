@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -27,7 +28,7 @@ namespace Business.Concrete
         {
             var result=_mapper.Map<OperationClaim>(operationDto);
             _claim.Add(result);
-            return new SuccessResult();
+            return new SuccessResult(Messages.ClaimAdded);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.DTOs.ShelfDetail;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class ShelfValidator:AbstractValidator<Shelf>
+    public class ShelfValidator:AbstractValidator<CreateShelfDto>
     {
         public ShelfValidator() 
         {

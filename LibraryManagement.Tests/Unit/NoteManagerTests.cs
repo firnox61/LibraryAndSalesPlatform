@@ -62,26 +62,26 @@ namespace LibraryManagement.Tests.Unit
             Assert.Equal(Messages.NoteDelete, result.Message);
         }
 
-        /*[Fact]
+        [Fact]
         public void GetById_Success_CreateNoteDto_Method_Test()
         {
             // Arrange
             int noteId = 1;
             var note = new Note { Id = noteId, Description = "Test Note", IsShared = true, UserId = 1, BookId = 1 };
-            var createNoteDto = new CreateNoteDTo { Id = noteId, Description = "Test Note", IsShared = true, UserId = 1, BookId = 1 };
+            var noteDetailDto = new NoteDetailDto { Id = noteId, Description = "Test Note", IsShared = true, UserId = 1, BookId = 1 };
             _mockNoteDal.Setup(m => m.Get(n => n.Id == noteId)).Returns(note);
-            _mockMapper.Setup(m => m.Map<CreateNoteDTo>(note)).Returns(createNoteDto);
+            _mockMapper.Setup(m => m.Map<NoteDetailDto>(note)).Returns(noteDetailDto);
 
             // Act
             var result = _noteManager.GetById(noteId);
 
             // Assert
             Assert.True(result.Success);
-            Assert.Equal(createNoteDto, result.Data);
+            Assert.Equal(noteDetailDto, result.Data);
             Assert.Equal(Messages.NoteDetail, result.Message);
-        }*/
+        }
 
-        /* [Fact]
+         [Fact]
          public void GetAll_Should_Return_SuccessDataResult_With_CreateNoteDtos()
          {
              // Arrange
@@ -89,39 +89,41 @@ namespace LibraryManagement.Tests.Unit
          {
              new Note { Id = 1, Description = "Test Note", IsShared = true, UserId = 1, BookId = 1 }
          };
-             var createNoteDtos = new List<CreateNoteDTo>
+             var noteDetailDtos = new List<NoteDetailDto>
          {
-             new CreateNoteDTo { Id = 1, Description = "Test Note", IsShared = true, UserId = 1, BookId = 1 }
+             new NoteDetailDto { Id = 1, Description = "Test Note", IsShared = true, UserId = 1, BookId = 1 }
          };
-             _mockNoteDal.Setup(m => m.GetAll()).Returns(notes);
-             _mockMapper.Setup(m => m.Map<List<CreateNoteDTo>>(notes)).Returns(createNoteDtos);
+            //   _mockFriendShipDal.Setup(m => m.GetAll(It.IsAny<System.Linq.Expressions.Expression<Func<FriendShip, bool>>>())).Returns(friendships);
+
+            _mockNoteDal.Setup(m => m.GetAll(It.IsAny<System.Linq.Expressions.Expression<Func<Note, bool>>>())).Returns(notes);
+             _mockMapper.Setup(m => m.Map<List<NoteDetailDto>>(notes)).Returns(noteDetailDtos);
 
              // Act
              var result = _noteManager.GetAll();
 
              // Assert
              Assert.True(result.Success);
-             Assert.Equal(createNoteDtos, result.Data);
+             Assert.Equal(noteDetailDtos, result.Data);
              Assert.Equal(Messages.NoteList, result.Message);
-         }*/
+         }
 
-       /* [Fact]
+        [Fact]
         public void Update_CreateNoteDto_Method_Test()
         {
             // Arrange
-            var createNoteDto = new CreateNoteDTo { Id = 1, Description = "Updated Test Note", IsShared = true, UserId = 1, BookId = 1 };
+            var updateNoteDto = new UpdateNoteDto { Id = 1, Description = "Updated Test Note", IsShared = true, UserId = 1, BookId = 1 };
             var note = new Note { Id = 1, Description = "Updated Test Note", IsShared = true, UserId = 1, BookId = 1 };
 
-            _mockMapper.Setup(m => m.Map<Note>(createNoteDto)).Returns(note);
+            _mockMapper.Setup(m => m.Map<Note>(updateNoteDto)).Returns(note);
 
             // Act
-            var result = _noteManager.Update(createNoteDto);
+            var result = _noteManager.Update(updateNoteDto);
 
             // Assert
             _mockNoteDal.Verify(m => m.Update(note), Times.Once);
             Assert.True(result.Success);
             Assert.Equal(Messages.NoteUpdate, result.Message);
-        }*/
+        }
 
         [Fact]
         public void GetAllByUserId_NoteDetailDtos_Method_Test()

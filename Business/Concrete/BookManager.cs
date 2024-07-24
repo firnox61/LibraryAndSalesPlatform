@@ -34,9 +34,8 @@ namespace Business.Concrete
             _environment = environment;
            
         }
-        
-        [ValidationAspect(typeof(BookValidator))]
         //[SecuredOperation("admin,user")]
+        [ValidationAspect(typeof(BookValidator))]
         public IResult Add(BookCreateDto bookCreateUpdateDto)
         {
             IResult result = BusinessRules.Run(BookAddImage(bookCreateUpdateDto));
@@ -53,14 +52,14 @@ namespace Business.Concrete
             _bookDal.Delete(book);
             return new SuccessResult();
         }
-
+        [SecuredOperation("admin")]
         public IDataResult<List<BookListDto>> GetAll()
         {
            var books= _bookDal.GetAll();
 
             // throw new NotImplementedException();
            // var book = _mapper.Map<List<Book>>(BookListDto);
-             return new SuccessDataResult<List<BookListDto>>(_mapper.Map<List<BookListDto>>(books));
+             return new SuccessDataResult<List<BookListDto>>(_mapper.Map<List<BookListDto>>(books),Messages.BooksList);
         }
 
         public IDataResult<BookDetailDto> GetById(int id)
@@ -116,7 +115,7 @@ namespace Business.Concrete
                 books = books.Where(b => b.Genre.Contains(bookFilterDto.Genre)).ToList();
             }
             
-            return new SuccessDataResult<List<Book>>(books);
+            return new SuccessDataResult<List<Book>>(books,Messages.BookFilter);
         }
 
         public IDataResult<List<BookShelfDetailDto>> GetBookShelfDetail()

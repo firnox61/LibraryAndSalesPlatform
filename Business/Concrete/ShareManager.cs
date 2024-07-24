@@ -22,19 +22,17 @@ namespace Business.Concrete
 {
     public class ShareManager : IShareService
     {
-        IShareDal _shareDal;
-        IMapper _mapper;
-        INoteDal _noteDal;
+        private IShareDal _shareDal;
+        private IMapper _mapper;
+        private INoteDal _noteDal;
         private readonly IUserDal _userDal;
         private IFriendShipService _friendShipService;
         private IFriendShipDal _friendShipDal;
-        private readonly ILoggerService _logger;
         public ShareManager(IShareDal shareDal, IMapper mapper, INoteDal noteDal, IUserDal userDal
-            , IFriendShipService friendShipService, IFriendShipDal friendShipDal, ILoggerService loggerService)
+            , IFriendShipService friendShipService, IFriendShipDal friendShipDal)
         {
             _shareDal = shareDal;
             _mapper = mapper;
-            // _context = dataContext;
             _noteDal = noteDal;
             _userDal = userDal;
             _friendShipService = friendShipService;
@@ -45,7 +43,6 @@ namespace Business.Concrete
         public IResult Add(CreateShareDto createShareDto)
         {
            
-            // var note = _context.Notes.Find(createShareDto.NoteId);
             IResult result = BusinessRules.Run(CheckIfNoteIsShared(createShareDto.NoteId),SharePrivateSettings(createShareDto));
             if (result != null)//kurala uymayan bir durum oluşmuşsa
             {
@@ -111,7 +108,6 @@ namespace Business.Concrete
 
                 if (isFriend)
                 {
-                   // _shareDal.Add(newShare);
                     return new SuccessResult();
                 }
                 else
