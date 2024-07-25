@@ -11,6 +11,7 @@ namespace Business.Abstract
 {
     public interface IOperationClaimService
     {
-        IResult Add(OperationDto operationDto );
+        IResult Add(OperationDto operationDto);
+        IDataResult<List<OperationDto>> GetAll();
     }
 }

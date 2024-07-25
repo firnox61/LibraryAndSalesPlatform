@@ -22,12 +22,12 @@ namespace Business.Concrete
 {
     public class ShareManager : IShareService
     {
-        private IShareDal _shareDal;
-        private IMapper _mapper;
-        private INoteDal _noteDal;
+        private readonly IShareDal _shareDal;
+        private readonly IMapper _mapper;
+        private readonly INoteDal _noteDal;
         private readonly IUserDal _userDal;
-        private IFriendShipService _friendShipService;
-        private IFriendShipDal _friendShipDal;
+        private readonly IFriendShipService _friendShipService;
+        private readonly IFriendShipDal _friendShipDal;
         public ShareManager(IShareDal shareDal, IMapper mapper, INoteDal noteDal, IUserDal userDal
             , IFriendShipService friendShipService, IFriendShipDal friendShipDal)
         {

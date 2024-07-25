@@ -17,10 +17,10 @@ namespace Business.Concrete
 {
     public class AuthManager : IAuthService
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private ITokenHelper _tokenHelper;
-        IUserDal _userDal;
+        private readonly ITokenHelper _tokenHelper;
+        private readonly IUserDal _userDal;
 
         public AuthManager(IUserService userService, IMapper mapper, IUserDal userDal, ITokenHelper tokenHelper)
         {

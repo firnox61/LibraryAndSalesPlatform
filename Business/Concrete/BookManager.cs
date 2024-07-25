@@ -23,7 +23,7 @@ namespace Business.Concrete
 {
     public class BookManager : IBookService
     {
-        IBookDal _bookDal;
+        private readonly IBookDal _bookDal;
         private readonly IMapper _mapper;
         private readonly IHostEnvironment _environment;
 

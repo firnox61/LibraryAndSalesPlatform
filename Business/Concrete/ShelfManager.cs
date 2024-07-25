@@ -15,8 +15,8 @@ namespace Business.Concrete
 {
     public class ShelfManager : IShelfService
     {
-        IShelfDal _shelfDal;
-        IMapper _mapper;
+        private readonly IShelfDal _shelfDal;
+        private readonly IMapper _mapper;
 
         public ShelfManager(IShelfDal shelfDal, IMapper mapper)
         {

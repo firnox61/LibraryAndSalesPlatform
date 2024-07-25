@@ -31,5 +31,16 @@ namespace Business.Concrete
            _claim.Add(result);
             return new SuccessResult(Messages.UserAddClaim);
         }
+
+        public IDataResult<List<UserOperationDto>> GetAll()
+        {
+            var userClaims= _claim.GetAll();
+            return new SuccessDataResult<List<UserOperationDto>>(_mapper.Map<List<UserOperationDto>>(userClaims));
+        }
+
+       /* public IDataResult<UserOperationDto> GetUserClaim(int id)
+        {
+            var result=_claim.Get(u=>u.Id==id);
+        }*/
     }
 }

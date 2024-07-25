@@ -15,7 +15,7 @@ namespace Business.Concrete
 {
     public class OperationClaimManager : IOperationClaimService
     {
-        IOperationClaimDal _claim;
+        private readonly IOperationClaimDal _claim;
         private readonly IMapper _mapper;
 
         public OperationClaimManager(IOperationClaimDal claim, IMapper mapper)
@@ -29,6 +29,12 @@ namespace Business.Concrete
             var result=_mapper.Map<OperationClaim>(operationDto);
             _claim.Add(result);
             return new SuccessResult(Messages.ClaimAdded);
+        }
+
+        public IDataResult<List<OperationDto>> GetAll()
+        {
+           var claims=_claim.GetAll();
+            return new SuccessDataResult<List<OperationDto>>(_mapper.Map<List<OperationDto>>(claims),Messages.GetAllClaim);
         }
     }
 }

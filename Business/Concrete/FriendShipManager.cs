@@ -18,7 +18,7 @@ namespace Business.Concrete
 {
     public class FriendShipManager : IFriendShipService
     {
-        IFriendShipDal _friendShipDal;
+        private readonly IFriendShipDal _friendShipDal;
         private readonly IUserDal _userDal;
         private readonly IMapper _mapper;
         private readonly ILoggerService _logger;

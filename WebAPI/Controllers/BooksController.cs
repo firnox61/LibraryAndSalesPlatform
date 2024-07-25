@@ -70,6 +70,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest();
         }
+        [HttpGet("BooksShelfDetail")]
+        public IActionResult GetBookShelfDetail()
+        {
+            var result=_bookService.GetBookShelfDetail();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+        }
         [HttpGet("filter")]
         public IActionResult GetFilteredBooks([FromQuery] BookFilterDto filter)
         {

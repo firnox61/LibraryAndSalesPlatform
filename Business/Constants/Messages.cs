@@ -64,5 +64,6 @@ namespace Business.Constants
         public static string BookFilter="Kitaplar uygun biçimde filtrelendi";
         public static string ClaimAdded="Claim eklendi";
         public static string UserAddClaim="Kullanıcıya claim eklendi";
+        public static string GetAllClaim="Claim ler listelendi";
     }
 }

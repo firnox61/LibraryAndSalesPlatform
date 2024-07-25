@@ -20,7 +20,7 @@ namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        IUserDal _userDal;
+        private readonly IUserDal _userDal;
         private readonly IMapper _mapper;
 
         public UserManager(IUserDal userDal, IMapper mapper)
